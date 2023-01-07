@@ -70,6 +70,11 @@ class LoginRepository {
       AppConfigConstant.sessionUserData,
     );
 
+    if (isExists) {
+      // load userdata to active state
+      await AppHelperStorage().loadUserDataToState();
+    }
+
     return isExists;
   }
 }

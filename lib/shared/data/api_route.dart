@@ -13,4 +13,8 @@ class AppApiRoutes {
   // POST
   // params: data, user_id
   static const pathScan = '${apiEndpoint}scan=true';
+  // User attendance sumamry (all)
+  // GET
+  // params: user_id
+  static const pathUserAttendanceSummary = '${apiEndpoint}attendance_info=true';
 }

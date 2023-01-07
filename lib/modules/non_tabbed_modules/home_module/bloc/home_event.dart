@@ -6,3 +6,7 @@ abstract class HomeEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class HomeEventInit extends HomeEvent {}
+
+class HomeEventInitData extends HomeEvent {}
