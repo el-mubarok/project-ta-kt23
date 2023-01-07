@@ -94,13 +94,20 @@ class _ModuleAccount extends State<ModuleAccount> {
           //
           GestureDetector(
             onTap: () async {
-              AppHelperStorage().clear().then((v) {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  NamedRoute.moduleLogin,
-                  (route) => false,
-                );
-              });
+              AppHelperCommon().showAlert(
+                context: context,
+                title: "Alert",
+                content: "Do you want to close application?",
+                onTapOk: () async {
+                  AppHelperStorage().clear().then((v) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      NamedRoute.moduleLogin,
+                      (route) => false,
+                    );
+                  });
+                },
+              );
             },
             child: Container(
               padding: const EdgeInsets.all(16),

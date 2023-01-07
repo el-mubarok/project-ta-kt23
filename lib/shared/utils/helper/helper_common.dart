@@ -1,3 +1,4 @@
+import 'package:attendanceapp/shared/ui/widgets/widget_dialog.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_device.dart';
 import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:attendanceapp/themes/color.dart';
@@ -52,6 +53,28 @@ class AppHelperCommon {
               ),
             ),
           ),
+        );
+      },
+    );
+  }
+
+  showAlert({
+    required BuildContext context,
+    String? title,
+    String? subtitle,
+    String? content,
+    VoidCallback? onTapOk,
+  }) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return WidgetDialog(
+          title: title,
+          subtitle: subtitle,
+          content: content,
+          onOk: () {
+            onTapOk!();
+          },
         );
       },
     );
