@@ -20,6 +20,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEventSubmitLogin>(_loginEventSubmitLogin);
     on<LoginEventUsernameChanged>(_loginEventUsernameChanged);
     on<LoginEventPasswordChanged>(_loginEventPasswordChanged);
+    on<LoginEventPasswordResetChanged>(_loginEventPasswordResetChanged);
+    on<LoginEventSubmitResetPassword>(_loginEventSubmitResetPassword);
   }
 
   void _loginEventCheckLoggedIn(
@@ -102,6 +104,44 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           state.username,
           password,
         ]),
+      ),
+    );
+  }
+
+  void _loginEventSubmitResetPassword(
+    LoginEventSubmitResetPassword event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(state.copyWith(
+      status: FormzStatus.submissionInProgress,
+    ));
+
+    // do reset password
+    bool result = await repository.submitResetPassword(
+      state.password.value,
+    );
+
+    if (result) {
+      emit(const LoginStateSuccess(200, "Password changed"));
+    } else {
+      emit(const LoginStateFailed(
+        0,
+        "unknown error, please look into log for details",
+      ));
+    }
+  }
+
+  void _loginEventPasswordResetChanged(
+    LoginEventPasswordResetChanged event,
+    Emitter<LoginState> emit,
+  ) async {
+    final InputText password = InputText.dirty(
+      event.password,
+    );
+    emit(
+      state.copyWith(
+        password: password,
+        status: Formz.validate([password]),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:attendanceapp/config/routes/route_names.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/account_module/screens/account_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/screens/home_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/login_module/screens/login_screen.dart';
+import 'package:attendanceapp/modules/non_tabbed_modules/reset_password_module/screens/reset_password_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/scan_module/screens/scan_screen.dart';
 import 'package:attendanceapp/modules/tabs/tabs.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,11 @@ class Routes {
       case NamedRoute.moduleLogin:
         return CupertinoPageRoute(
           builder: (_) => const ModuleLogin(),
+        );
+
+      case NamedRoute.moduleResetPassword:
+        return MaterialPageRoute(
+          builder: (_) => const ModuleResetPassword(),
         );
 
       case NamedRoute.moduleHome:

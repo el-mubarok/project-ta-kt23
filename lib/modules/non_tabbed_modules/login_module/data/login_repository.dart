@@ -111,4 +111,52 @@ class LoginRepository {
       return false;
     }
   }
+
+  Future<bool> submitResetPassword(String password) async {
+    Dio http = AppHelperHttp().http();
+    String path = AppApiRoutes.pathResetPassword;
+    String? userId = AppUtilsGlobal().userData.value?.data?.id.toString();
+    String deviceId = await AppHelperDevice().getEncodedDeviceId();
+    SharedUserData? data;
+
+    try {
+      FormData postData = FormData.fromMap({
+        "password": password,
+        "device_id": deviceId,
+        "user_id": userId,
+      });
+
+      if (kDebugMode) {
+        print({
+          "password": password,
+          "device_id": deviceId,
+          "user_id": userId,
+        });
+      }
+
+      Response response = await http.post(
+        path,
+        data: postData,
+      );
+      data = SharedUserData.fromJson(response.data);
+
+      if (data.code == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } on DioError catch (err) {
+      // http error
+      if (kDebugMode) {
+        print("submitLogin(): http error at: $err");
+      }
+      return false;
+    } catch (err) {
+      // unknown error
+      if (kDebugMode) {
+        print("submitLogin(): unknwon error at: $err");
+      }
+      return false;
+    }
+  }
 }

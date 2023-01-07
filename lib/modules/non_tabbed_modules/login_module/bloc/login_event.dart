@@ -38,3 +38,19 @@ class LoginEventPasswordChanged extends LoginEvent {
   @override
   List<Object> get props => [password];
 }
+
+class LoginEventSubmitResetPassword extends LoginEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class LoginEventPasswordResetChanged extends LoginEvent {
+  final String password;
+
+  const LoginEventPasswordResetChanged(
+    this.password,
+  );
+
+  @override
+  List<Object> get props => [password];
+}

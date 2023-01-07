@@ -1,13 +1,14 @@
 import 'package:attendanceapp/shared/data/api_route.dart';
 import 'package:attendanceapp/shared/models/shared_scanned_data_model.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_http.dart';
+import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class ScanRepository {
   Future<SharedScannedData?> scanStart(String qrCode) async {
     Dio http = AppHelperHttp().http();
-    String userId = '2';
+    String? userId = AppUtilsGlobal().userData.value?.data?.id.toString();
     String path = AppApiRoutes.pathScan;
     SharedScannedData? data;
 

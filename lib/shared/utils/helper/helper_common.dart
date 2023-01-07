@@ -64,6 +64,8 @@ class AppHelperCommon {
     String? subtitle,
     String? content,
     VoidCallback? onTapOk,
+    VoidCallback? onDismissed,
+    bool okOnly = false,
   }) {
     showDialog(
       context: context,
@@ -72,11 +74,14 @@ class AppHelperCommon {
           title: title,
           subtitle: subtitle,
           content: content,
+          okOnly: okOnly,
           onOk: () {
             onTapOk!();
           },
         );
       },
-    );
+    ).then((value) {
+      onDismissed!();
+    });
   }
 }

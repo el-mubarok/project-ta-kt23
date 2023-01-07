@@ -8,12 +8,14 @@ class WidgetDialog extends StatefulWidget {
     this.subtitle,
     this.content,
     this.onOk,
+    this.okOnly = false,
   });
 
   final String? title;
   final String? subtitle;
   final String? content;
   final VoidCallback? onOk;
+  final bool okOnly;
 
   @override
   State<StatefulWidget> createState() => _WidgetDialog();
@@ -57,18 +59,21 @@ class _WidgetDialog extends State<WidgetDialog> {
                           fontWeight: FontWeight.w500,
                           decoration: TextDecoration.none,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       //
-                      Text(
-                        widget.subtitle ?? "",
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: AppColors.black,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w300,
-                          decoration: TextDecoration.none,
+                      if (widget.subtitle != null)
+                        Text(
+                          widget.subtitle ?? "",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.black,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w300,
+                            decoration: TextDecoration.none,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
                     ],
                     //
                   ),
@@ -87,6 +92,7 @@ class _WidgetDialog extends State<WidgetDialog> {
                       fontWeight: FontWeight.w400,
                       decoration: TextDecoration.none,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 //
@@ -95,12 +101,13 @@ class _WidgetDialog extends State<WidgetDialog> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _AlerButtonItem(
-                        text: "Cancel",
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+                      if (!widget.okOnly)
+                        _AlerButtonItem(
+                          text: "Cancel",
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
                       _AlerButtonItem(
                         text: "OK",
                         onTap: () {

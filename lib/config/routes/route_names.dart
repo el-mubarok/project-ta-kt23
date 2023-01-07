@@ -6,6 +6,7 @@ class NamedRoute {
   //
   static const String moduleSplash = 'splash';
   static const String moduleLogin = 'login';
+  static const String moduleResetPassword = 'reset-password';
   //
   static const String moduleHome = 'home';
   static const String moduleAccount = 'account';

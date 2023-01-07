@@ -21,4 +21,8 @@ class AppApiRoutes {
   // GET
   // params: user_id
   static const pathUserDetail = '${apiEndpoint}user_detail=true';
+  // Reset user password
+  // POST
+  // params: user_id, password, device_id
+  static const pathResetPassword = '${apiEndpoint}reset_password=true';
 }

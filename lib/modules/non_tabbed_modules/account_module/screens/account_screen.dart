@@ -69,9 +69,17 @@ class _ModuleAccount extends State<ModuleAccount> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //
-                  const _Item(
-                    title: 'Change Password',
-                    icon: HeroIcons.key,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NamedRoute.moduleResetPassword,
+                      );
+                    },
+                    child: const _Item(
+                      title: 'Change Password',
+                      icon: HeroIcons.key,
+                    ),
                   ),
                   const _Item(
                     title: 'About',
@@ -99,6 +107,15 @@ class _ModuleAccount extends State<ModuleAccount> {
                 title: "Alert",
                 content: "Do you want to close application?",
                 onTapOk: () async {
+                  AppHelperStorage().clear().then((v) {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      NamedRoute.moduleLogin,
+                      (route) => false,
+                    );
+                  });
+                },
+                onDismissed: () {
                   AppHelperStorage().clear().then((v) {
                     Navigator.pushNamedAndRemoveUntil(
                       context,

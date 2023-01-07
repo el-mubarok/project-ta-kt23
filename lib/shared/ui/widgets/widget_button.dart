@@ -70,20 +70,6 @@ class _WidgetButton extends State<WidgetButton> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                if (widget.prefixIcon != null)
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 8,
-                    ),
-                    child: HeroIcon(
-                      widget.prefixIcon ?? HeroIcons.academicCap,
-                      color: (widget.color ?? AppColors.success)
-                                  .computeLuminance() >=
-                              0.5
-                          ? AppColors.black
-                          : AppColors.white,
-                    ),
-                  ),
                 //
                 if (widget.isLoading)
                   Padding(
@@ -101,6 +87,21 @@ class _WidgetButton extends State<WidgetButton> {
                               : AppColors.white,
                         ),
                       ),
+                    ),
+                  ),
+
+                if (widget.prefixIcon != null)
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 8,
+                    ),
+                    child: HeroIcon(
+                      widget.prefixIcon ?? HeroIcons.academicCap,
+                      color: (widget.color ?? AppColors.success)
+                                  .computeLuminance() >=
+                              0.5
+                          ? AppColors.black
+                          : AppColors.white,
                     ),
                   ),
 
