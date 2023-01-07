@@ -115,15 +115,7 @@ class _ModuleAccount extends State<ModuleAccount> {
                     );
                   });
                 },
-                onDismissed: () {
-                  AppHelperStorage().clear().then((v) {
-                    Navigator.pushNamedAndRemoveUntil(
-                      context,
-                      NamedRoute.moduleLogin,
-                      (route) => false,
-                    );
-                  });
-                },
+                onDismissed: () {},
               );
             },
             child: Container(
