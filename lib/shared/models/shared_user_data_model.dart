@@ -38,27 +38,33 @@ class Data {
   Data({
     required this.id,
     required this.role,
+    required this.nip,
     required this.fullName,
     required this.department,
     required this.username,
+    required this.avatar,
     required this.createdAt,
     required this.updatedAt,
   });
 
   final int id;
   final String role;
+  final String? nip;
   final String fullName;
   final int department;
   final String username;
+  final dynamic avatar;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         role: json["role"],
+        nip: json["nip"],
         fullName: json["full_name"],
         department: json["department"],
         username: json["username"],
+        avatar: json["avatar"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -66,9 +72,11 @@ class Data {
   Map<String, dynamic> toJson() => {
         "id": id,
         "role": role,
+        "nip": nip,
         "full_name": fullName,
         "department": department,
         "username": username,
+        "avatar": avatar,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

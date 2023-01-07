@@ -1,3 +1,4 @@
+import 'package:attendanceapp/config/assets.dart';
 import 'package:attendanceapp/config/routes/route_names.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/bloc/home_bloc.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/data/home_repository.dart';
@@ -90,13 +91,19 @@ class _ModuleHome extends State<ModuleHome> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
-                                child: Image.network(
-                                  "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                  isAntiAlias: true,
-                                ),
+                                child: (userData?.data?.avatar)
+                                        .toString()
+                                        .isNotEmpty
+                                    ? Image.network(
+                                        userData?.data?.avatar,
+                                        fit: BoxFit.cover,
+                                        isAntiAlias: true,
+                                      )
+                                    : Image.asset(
+                                        AppAsset.emptyAvatar,
+                                        fit: BoxFit.cover,
+                                        isAntiAlias: true,
+                                      ),
                               ),
                             ),
                             //
@@ -115,9 +122,10 @@ class _ModuleHome extends State<ModuleHome> {
                               ),
                             ),
                             //
-                            const Text(
-                              "230102",
-                              style: TextStyle(
+                            Text(
+                              userData?.data?.nip ?? "",
+                              // ((userData?.data?.avatar).isEmpty.toString()),
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w300,
                                 letterSpacing: 2,
                               ),

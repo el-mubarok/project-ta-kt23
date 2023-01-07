@@ -4,6 +4,7 @@ import 'package:attendanceapp/shared/models/shared_user_data_model.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_device.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_http.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_storage.dart';
+import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -73,8 +74,41 @@ class LoginRepository {
     if (isExists) {
       // load userdata to active state
       await AppHelperStorage().loadUserDataToState();
+      bool reload = await reloadUserData();
+      if (!reload) {}
     }
 
     return isExists;
+  }
+
+  Future<bool> reloadUserData() async {
+    Dio http = AppHelperHttp().http();
+    String path = AppApiRoutes.pathUserDetail;
+    String? userId = AppUtilsGlobal().userData.value?.data?.id.toString();
+    SharedUserData? data;
+
+    try {
+      Response response = await http.get(path, queryParameters: {
+        "user_id": userId,
+      });
+
+      data = SharedUserData.fromJson(response.data);
+
+      await AppHelperStorage().storeUserData(data);
+
+      return true;
+    } on DioError catch (err) {
+      // http error
+      if (kDebugMode) {
+        print("reloadUserData(): unknown error at: $err");
+      }
+      return false;
+    } catch (err) {
+      // unknown error
+      if (kDebugMode) {
+        print("reloadUserData(): unknown error at: $err");
+      }
+      return false;
+    }
   }
 }

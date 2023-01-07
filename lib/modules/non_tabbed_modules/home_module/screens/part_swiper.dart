@@ -1,7 +1,9 @@
+import 'package:attendanceapp/modules/non_tabbed_modules/home_module/bloc/home_bloc.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/scan_module/screens/scan_screen.dart';
 import 'package:attendanceapp/themes/color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:heroicons/heroicons.dart';
 
 class PartSwiper extends StatefulWidget {
@@ -59,77 +61,84 @@ class _PartSwiper extends State<PartSwiper>
           ),
         );
       },
-    );
+    ).then((value) {
+      // reload summary data
+      ctx.read<HomeBloc>().add(HomeEventInitData());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanUpdate: (details) {
-        // print("panning: ${details.delta.dy}");
-        if (details.delta.dy < 0) {
-          if (kDebugMode) {
-            print("panning swipe up ${details.delta.dy}");
-          }
-          openScanModal(context);
-          // Navigator.pushNamed(
-          //   context,
-          //   NamedRoute.moduleScan,
-          // );
-        } else {
-          if (kDebugMode) {
-            print("panning swipe down");
-          }
-        }
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onPanUpdate: (details) {
+            // print("panning: ${details.delta.dy}");
+            if (details.delta.dy < 0) {
+              if (kDebugMode) {
+                print("panning swipe up ${details.delta.dy}");
+              }
+              openScanModal(context);
+              // Navigator.pushNamed(
+              //   context,
+              //   NamedRoute.moduleScan,
+              // );
+            } else {
+              if (kDebugMode) {
+                print("panning swipe down");
+              }
+            }
+          },
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Positioned(
+                child: CustomPaint(
+                  size: Size(
+                    MediaQuery.of(context).size.width,
+                    (MediaQuery.of(context).size.width * 0.2722222222222222)
+                        .toDouble(),
+                  ),
+                  painter: RPSCustomPainter(),
+                ),
+                // child: CustomPaint(
+                //   size: Size(
+                //     MediaQuery.of(context).size.width,
+                //     (MediaQuery.of(context).size.width * 0.19166666666666668)
+                //         .toDouble(),
+                //   ), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
+                //   painter: RPSCustomPainter2(),
+                // ),
+              ),
+              //
+              const Padding(
+                padding: EdgeInsets.only(
+                  bottom: 20,
+                  // bottom: 8,
+                ),
+                child: Text(
+                  "Swipe up to scan QR Code",
+                  style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 14,
+                    letterSpacing: 1,
+                  ),
+                ),
+              ),
+              //
+              Positioned(
+                top: animPosition.value,
+                child: const HeroIcon(
+                  HeroIcons.chevronDoubleUp,
+                  style: HeroIconStyle.solid,
+                  size: 24,
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+          ),
+        );
       },
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Positioned(
-            child: CustomPaint(
-              size: Size(
-                MediaQuery.of(context).size.width,
-                (MediaQuery.of(context).size.width * 0.2722222222222222)
-                    .toDouble(),
-              ),
-              painter: RPSCustomPainter(),
-            ),
-            // child: CustomPaint(
-            //   size: Size(
-            //     MediaQuery.of(context).size.width,
-            //     (MediaQuery.of(context).size.width * 0.19166666666666668)
-            //         .toDouble(),
-            //   ), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-            //   painter: RPSCustomPainter2(),
-            // ),
-          ),
-          //
-          const Padding(
-            padding: EdgeInsets.only(
-              bottom: 20,
-              // bottom: 8,
-            ),
-            child: Text(
-              "Swipe up to scan QR Code",
-              style: TextStyle(
-                color: AppColors.white,
-                fontSize: 14,
-                letterSpacing: 1,
-              ),
-            ),
-          ),
-          //
-          Positioned(
-            top: animPosition.value,
-            child: const HeroIcon(
-              HeroIcons.chevronDoubleUp,
-              style: HeroIconStyle.solid,
-              size: 24,
-              color: AppColors.primary,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

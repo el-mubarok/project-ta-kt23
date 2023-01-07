@@ -17,4 +17,8 @@ class AppApiRoutes {
   // GET
   // params: user_id
   static const pathUserAttendanceSummary = '${apiEndpoint}attendance_info=true';
+  // User detail
+  // GET
+  // params: user_id
+  static const pathUserDetail = '${apiEndpoint}user_detail=true';
 }
