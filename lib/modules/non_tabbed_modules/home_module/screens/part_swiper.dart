@@ -79,10 +79,6 @@ class _PartSwiper extends State<PartSwiper>
                 print("panning swipe up ${details.delta.dy}");
               }
               openScanModal(context);
-              // Navigator.pushNamed(
-              //   context,
-              //   NamedRoute.moduleScan,
-              // );
             } else {
               if (kDebugMode) {
                 print("panning swipe down");
@@ -101,14 +97,6 @@ class _PartSwiper extends State<PartSwiper>
                   ),
                   painter: RPSCustomPainter(),
                 ),
-                // child: CustomPaint(
-                //   size: Size(
-                //     MediaQuery.of(context).size.width,
-                //     (MediaQuery.of(context).size.width * 0.19166666666666668)
-                //         .toDouble(),
-                //   ), //You can Replace [WIDTH] with your desired width for Custom Paint and height will be calculated automatically
-                //   painter: RPSCustomPainter2(),
-                // ),
               ),
               //
               const Padding(
@@ -184,56 +172,6 @@ class RPSCustomPainter extends CustomPainter {
     // ignore: non_constant_identifier_names
     Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
     // paint_0_fill.color = Color(0xffFF0000).withOpacity(1.0);
-    paint_0_fill.color = AppColors.primary;
-    canvas.drawPath(path_0, paint_0_fill);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
-  }
-}
-
-class RPSCustomPainter2 extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
-    path_0.moveTo(0, size.height * 0.006528319);
-    path_0.cubicTo(
-        0,
-        size.height * 0.006528319,
-        size.width * 0.1526631,
-        size.height * 0.006528319,
-        size.width * 0.2500000,
-        size.height * 0.006528319);
-    path_0.cubicTo(
-        size.width * 0.4115917,
-        size.height * 0.006528319,
-        size.width * 0.3953139,
-        size.height * 0.5153638,
-        size.width * 0.5001722,
-        size.height * 0.5153638);
-    path_0.cubicTo(
-        size.width * 0.6050333,
-        size.height * 0.5153638,
-        size.width * 0.5902778,
-        size.height * 0.006529101,
-        size.width * 0.7500000,
-        size.height * 0.006528319);
-    path_0.cubicTo(
-        size.width * 0.8480639,
-        size.height * 0.006527841,
-        size.width,
-        size.height * 0.006528319,
-        size.width,
-        size.height * 0.006528319);
-    path_0.lineTo(size.width, size.height * 0.9959000);
-    path_0.lineTo(0, size.height * 0.9959000);
-    path_0.lineTo(0, size.height * 0.006528319);
-    path_0.close();
-
-    // ignore: non_constant_identifier_names
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
     paint_0_fill.color = AppColors.primary;
     canvas.drawPath(path_0, paint_0_fill);
   }
