@@ -22,7 +22,7 @@ class SharedUserAttendanceAll {
 
   factory SharedUserAttendanceAll.fromJson(Map<String, dynamic> json) =>
       SharedUserAttendanceAll(
-        code: json["code"],
+        code: int.parse(json["code"].toString()),
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
         message: json["message"],
       );
@@ -50,7 +50,7 @@ class Datum {
   final String notPresent;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        userId: json["user_id"],
+        userId: int.parse(json["user_id"].toString()),
         fullName: json["full_name"],
         presentOnTime: json["present_on_time"],
         presentLate: json["present_late"],

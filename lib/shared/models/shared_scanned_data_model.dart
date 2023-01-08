@@ -22,7 +22,7 @@ class SharedScannedData {
 
   factory SharedScannedData.fromJson(Map<String, dynamic> json) =>
       SharedScannedData(
-        code: json["code"],
+        code: int.parse(json["code"].toString()),
         data: json["data"] != null ? Data.fromJson(json["data"]) : null,
         message: json["message"],
       );
@@ -97,9 +97,9 @@ class Notification {
 
   factory Notification.fromJson(Map<String, dynamic> json) => Notification(
         id: json["id"],
-        recipients: json["recipients"],
+        recipients: int.parse(json["recipients"].toString()),
         externalId: json["external_id"],
-        statusCode: json["_status_code"],
+        statusCode: int.parse(json["_status_code"].toString()),
       );
 
   Map<String, dynamic> toJson() => {

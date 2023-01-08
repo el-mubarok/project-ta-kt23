@@ -1,4 +1,5 @@
 import 'package:attendanceapp/shared/ui/widgets/widget_dialog.dart';
+import 'package:attendanceapp/shared/ui/widgets/widget_input.dart';
 import 'package:attendanceapp/shared/utils/helper/helper_device.dart';
 import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:attendanceapp/themes/color.dart';
@@ -25,9 +26,12 @@ class AppHelperCommon {
 
   showDeviceId(BuildContext context) async {
     String deviceId = "";
+    TextEditingController text = TextEditingController();
 
     AppHelperDevice().getEncodedDeviceId().then((value) {
       deviceId = value;
+      text.text = deviceId;
+      print(deviceId);
     });
     showModalBottomSheet<void>(
       context: context,
@@ -44,13 +48,29 @@ class AppHelperCommon {
                 topRight: Radius.circular(16),
               ),
             ),
-            child: Center(
-              child: PrettyQr(
-                size: 200,
-                data: deviceId,
-                errorCorrectLevel: QrErrorCorrectLevel.M,
-                roundEdges: true,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PrettyQr(
+                  size: 200,
+                  data: deviceId,
+                  errorCorrectLevel: QrErrorCorrectLevel.M,
+                  roundEdges: true,
+                ),
+                //
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 16,
+                  ),
+                  child: WidgetInput(
+                    hint: "My device ID",
+                    textController: text,
+                    type: TextInputType.text,
+                    onChanged: (v) {},
+                  ),
+                ),
+              ],
             ),
           ),
         );
