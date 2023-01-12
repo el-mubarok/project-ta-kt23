@@ -5,11 +5,11 @@ import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-class HomeRepository {
-  Future<SharedUserAttendanceMonth?> getUserAttendanceSummary() async {
+class HistoryRepository {
+  Future<SharedUserAttendanceMonth?> getUserAttendanceSummaryAll() async {
     Dio http = AppHelperHttp().http();
     String? userId = AppUtilsGlobal().userData.value?.data?.id.toString();
-    String path = AppApiRoutes.pathUserAttendanceSummary;
+    String path = AppApiRoutes.pathUserAttendanceSummaryAll;
     SharedUserAttendanceMonth? data;
 
     try {
@@ -32,13 +32,13 @@ class HomeRepository {
     } on DioError catch (err) {
       // http error
       if (kDebugMode) {
-        print("getUserAttendanceSummary(): http error at: $err");
+        print("getUserAttendanceSummaryAll(): http error at: $err");
       }
       return null;
     } catch (err) {
       // unknown error
       if (kDebugMode) {
-        print("getUserAttendanceSummary(): unknown error at: $err");
+        print("getUserAttendanceSummaryAll(): unknown error at: $err");
       }
       return null;
     }

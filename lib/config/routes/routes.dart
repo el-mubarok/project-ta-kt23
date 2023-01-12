@@ -1,5 +1,6 @@
 import 'package:attendanceapp/config/routes/route_names.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/account_module/screens/account_screen.dart';
+import 'package:attendanceapp/modules/non_tabbed_modules/history_module/screens/history_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/screens/home_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/login_module/screens/login_screen.dart';
 import 'package:attendanceapp/modules/non_tabbed_modules/reset_password_module/screens/reset_password_screen.dart';
@@ -45,6 +46,11 @@ class Routes {
       case NamedRoute.moduleAccount:
         return MaterialPageRoute(
           builder: (_) => const ModuleAccount(),
+        );
+
+      case NamedRoute.moduleHistory:
+        return MaterialPageRoute(
+          builder: (_) => const ModuleHistory(),
         );
 
       // default page not found

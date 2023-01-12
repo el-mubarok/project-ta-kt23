@@ -1,5 +1,5 @@
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/bloc/home_bloc.dart';
-import 'package:attendanceapp/shared/models/shared_user_attendance_all_model.dart';
+import 'package:attendanceapp/shared/models/shared_user_attendance_month_model.dart';
 import 'package:attendanceapp/themes/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,7 @@ class PartCardInfo extends StatefulWidget {
 }
 
 class _PartCardInfo extends State<PartCardInfo> {
-  SharedUserAttendanceAll? userAttendanceSummary;
+  SharedUserAttendanceMonth? userAttendanceSummary;
   String? presentOnTime = '0';
   String? presentLate = '0';
   String? notPresent = '0';
@@ -38,15 +38,15 @@ class _PartCardInfo extends State<PartCardInfo> {
             userAttendanceSummary = state.userAttendanceSummary;
 
             if (userAttendanceSummary != null) {
-              if (userAttendanceSummary!.data.isNotEmpty) {
+              if (userAttendanceSummary!.data!.isNotEmpty) {
                 presentOnTime = userAttendanceSummary != null
-                    ? userAttendanceSummary?.data[0].presentOnTime.toString()
+                    ? userAttendanceSummary?.data![0]!.presentOnTime.toString()
                     : '0';
                 presentLate = userAttendanceSummary != null
-                    ? userAttendanceSummary?.data[0].presentLate.toString()
+                    ? userAttendanceSummary?.data![0]!.presentLate.toString()
                     : '0';
                 notPresent = userAttendanceSummary != null
-                    ? userAttendanceSummary?.data[0].notPresent.toString()
+                    ? userAttendanceSummary?.data![0]!.notPresent.toString()
                     : '0';
               }
             }
@@ -73,7 +73,7 @@ class _PartCardInfo extends State<PartCardInfo> {
                   bottom: 16,
                 ),
                 child: Text(
-                  "Recap for this month: ${DateFormat('MM/dd/y').format(DateTime.now())}",
+                  "Recap for this month: ${DateFormat('MM/y').format(DateTime.now())}",
                   style: const TextStyle(
                     fontSize: 12,
                     color: AppColors.primary,

@@ -4,6 +4,7 @@ import 'package:attendanceapp/shared/utils/helper/helper_device.dart';
 import 'package:attendanceapp/shared/utils/utils_global.dart';
 import 'package:attendanceapp/themes/color.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class AppHelperCommon {
@@ -103,5 +104,17 @@ class AppHelperCommon {
     ).then((value) {
       onDismissed!();
     });
+  }
+
+  String dateFormatterHistory(DateTime? date, [bool hoursOnly = false]) {
+    var result = DateFormat("E, d LLL y").format(
+      (date ?? DateTime.now()),
+    );
+
+    if (hoursOnly) {
+      result = date != null ? DateFormat("HH:mm").format((date)) : '-';
+    }
+
+    return result;
   }
 }

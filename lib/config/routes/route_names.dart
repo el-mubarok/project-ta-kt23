@@ -11,4 +11,5 @@ class NamedRoute {
   static const String moduleHome = 'home';
   static const String moduleAccount = 'account';
   static const String moduleScan = 'scan';
+  static const String moduleHistory = 'history';
 }

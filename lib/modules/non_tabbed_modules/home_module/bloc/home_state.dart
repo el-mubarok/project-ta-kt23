@@ -12,7 +12,7 @@ class HomeInitial extends HomeState {}
 class HomeStateLoading extends HomeState {}
 
 class HomeStateDataLoaded extends HomeState {
-  final SharedUserAttendanceAll? userAttendanceSummary;
+  final SharedUserAttendanceMonth? userAttendanceSummary;
 
   const HomeStateDataLoaded({
     required this.userAttendanceSummary,

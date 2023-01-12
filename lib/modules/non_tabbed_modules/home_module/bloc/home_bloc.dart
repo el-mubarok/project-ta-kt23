@@ -1,6 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:attendanceapp/modules/non_tabbed_modules/home_module/data/home_repository.dart';
-import 'package:attendanceapp/shared/models/shared_user_attendance_all_model.dart';
+import 'package:attendanceapp/shared/models/shared_user_attendance_month_model.dart';
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -25,7 +25,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     // await Future.delayed(const Duration(seconds: 2));
 
-    SharedUserAttendanceAll? data = await repository.getUserAttendanceSummary();
+    SharedUserAttendanceMonth? data =
+        await repository.getUserAttendanceSummary();
 
     emit(HomeStateDataLoaded(userAttendanceSummary: data));
   }

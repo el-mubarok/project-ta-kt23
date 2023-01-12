@@ -81,6 +81,18 @@ class _ModuleAccount extends State<ModuleAccount> {
                       icon: HeroIcons.key,
                     ),
                   ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NamedRoute.moduleHistory,
+                      );
+                    },
+                    child: const _Item(
+                      title: 'Attendance History',
+                      icon: HeroIcons.queueList,
+                    ),
+                  ),
                   const _Item(
                     title: 'About',
                     icon: HeroIcons.informationCircle,
