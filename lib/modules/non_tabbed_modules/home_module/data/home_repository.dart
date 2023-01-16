@@ -12,6 +12,8 @@ class HomeRepository {
     String path = AppApiRoutes.pathUserAttendanceSummary;
     SharedUserAttendanceMonth? data;
 
+    print(path);
+
     try {
       Response response = await http.get(
         path,

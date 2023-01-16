@@ -89,11 +89,14 @@ class _ModuleHome extends State<ModuleHome> {
                                 color: AppColors.white,
                                 borderRadius: BorderRadius.circular(200),
                               ),
+                              // child: Text("${userData?.data?.avatar}"),
+                              // (userData?.data?.avatar)
+                              //               .toString()
+                              //               .isNotEmpty ||
+                              //           userData?.data?.avatar != 'null'
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
-                                child: (userData?.data?.avatar)
-                                        .toString()
-                                        .isNotEmpty
+                                child: userData?.data?.avatar != null
                                     ? Image.network(
                                         userData?.data?.avatar,
                                         fit: BoxFit.cover,
